@@ -1,10 +1,6 @@
 <div align="center">
 
-![爱你](https://img.shields.io/badge/%E7%88%B1%E4%BD%A0-%E7%88%B1%E4%BD%A0-ff0033?style=for-the-badge&label=%20)
-![爱你](https://img.shields.io/badge/%E7%88%B1%E4%BD%A0-%E7%88%B1%E4%BD%A0-ff0033?style=for-the-badge&label=%20)
-![爱你](https://img.shields.io/badge/%E7%88%B1%E4%BD%A0-%E7%88%B1%E4%BD%A0-ff0033?style=for-the-badge&label=%20)
-![爱你](https://img.shields.io/badge/%E7%88%B1%E4%BD%A0-%E7%88%B1%E4%BD%A0-ff0033?style=for-the-badge&label=%20)
-![爱你](https://img.shields.io/badge/%E7%88%B1%E4%BD%A0-%E7%88%B1%E4%BD%A0-ff0033?style=for-the-badge&label=%20)
+<img src="docs/assets/ai-ni.svg" alt="爱你 爱你 爱你 爱你 爱你 爱你" width="840">
 
 # 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你
 
