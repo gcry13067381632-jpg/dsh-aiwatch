@@ -65,14 +65,35 @@ So the plugin does three things:
 
 ---
 
-## Features
+## How it "sees" you (four little scenes)
 
-- **Desktop trail into context** — create / modify / rename / move / delete, all become entries in the session
-- **Text diffs included** — which lines changed and what they became, attached under the entry (`.txt/.md/.js/.json/…`; the body text of `.docx` works too)
-- **The AI's own edits are not recorded** — paths are read from tool-call arguments, so attribution is per-file; edits you make elsewhere are never affected
-- **Never interrupts you** — batched delivery, never one message per event
-- **Global hotkey** — `Ctrl+Alt+A` by default (recordable, must include Ctrl or Alt). Press it and the batch is sent **and the AI is woken up** to work
-- **Fully local** — no network calls, no accounts, no uploads. The trail stays in a folder on your machine
+**Scene 1 — You edited three lines in Word, and now you want to ask about them.**
+How it used to go: switch to the chat, type *"I just changed the third paragraph in D:\project\report.docx"*, and wait for the AI to go find the file.
+How it goes now: the second you switch back to the window, the diff is already in front of it —
+
+```text
+【desktop activity trail · no reply needed】
+dir: D:\project\report
+[14:22:07] modified  report.docx
+  - market share is about 12%
+  + market share is about 27%
+```
+
+**Scene 2 — You changed seven files at once.**
+You don't have to announce them one by one. They batch up and go in together when you come back to the window — no wall of messages, and nothing interrupts you.
+
+**Scene 3 — The AI is writing code and happens to touch the same folder.**
+Those edits **are not yours**. The plugin reads the target **file paths** out of the AI's tool-call arguments, marks only those, and leaves everything else alone. Your edits stay yours — every one of them.
+
+**Scene 4 — You're done, and you want it to start working right now.**
+Hit `Ctrl+Alt+A` (configurable, recordable): the pending batch goes out **and the AI is woken up** to work on it. Don't want the wake-up? Turn off "wake the AI on hotkey" in the settings card, and it will only inject silently.
+
+A few other small courtesies:
+
+- **Fully local** — no network requests, no accounts, no uploads; the trail only ever lands in a folder on your machine;
+- **Idle time means nothing is recorded** — background sync, indexing and antivirus churn are dropped;
+- **`.docx` bodies included** — edits inside a Word document arrive with the diff too;
+- **You can always stop it** — the "watching" switch on the settings card, or `/aiwatch off`.
 
 ---
 
