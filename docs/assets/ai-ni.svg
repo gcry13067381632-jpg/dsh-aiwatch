@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240">
-  <rect width="900" height="240" fill="#fff5f7"/>
-  <text x="450" y="72" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="56" font-weight="700" fill="#ff0033" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你</text>
-  <text x="450" y="140" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="42" font-weight="700" fill="#e11d48" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你</text>
-  <text x="450" y="198" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="32" font-weight="700" fill="#be123c" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你</text>
-  <text x="450" y="228" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" fill="#9f1239" text-anchor="middle">— 一直盯着你、一步都不离开的鲸鱼娘 —</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320">
+  <rect width="900" height="320" fill="#fff5f7"/>
+  <text x="450" y="66" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="58" font-weight="700" fill="#ff0026" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你</text>
+  <text x="450" y="122" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="48" font-weight="700" fill="#ff0033" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你</text>
+  <text x="450" y="172" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="40" font-weight="700" fill="#e11d48" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你</text>
+  <text x="450" y="218" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="32" font-weight="700" fill="#d1124a" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你</text>
+  <text x="450" y="258" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="26" font-weight="700" fill="#be123c" text-anchor="middle">爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你</text>
+  <text x="450" y="298" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" fill="#9f1239" text-anchor="middle">— 一直盯着你、一步都不离开的鲸鱼娘 —</text>
 </svg>
