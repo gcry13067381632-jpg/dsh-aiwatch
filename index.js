@@ -48,10 +48,20 @@ import { fileURLToPath } from 'node:url';
 import Schema from '@deepseek-ai/schemastery';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const VERSION = '0.1.6';
+const VERSION = '0.3.8';
 const WORKSPACE = 'D:\\newwenjianjia\\aiwork\\鲸鱼娘';
-const DEFAULT_DATA = path.join(WORKSPACE, 'watch-log');
-const DEFAULT_WATCHER = path.join(WORKSPACE, '工具', 'desktop-watch', 'watch-desktop.mjs');
+// 轨迹目录：开发机沿用工作区 watch-log；别人机器上落到 ~/.dsh/aiwatch
+const DEFAULT_DATA = (() => {
+  try { if (fs.existsSync(WORKSPACE)) return path.join(WORKSPACE, 'watch-log'); } catch { /* ignore */ }
+  return path.join(process.env.USERPROFILE || process.env.HOME || '.', '.dsh', 'aiwatch');
+})();
+// 优先用"随插件包一起装进来"的监听脚本（这样别人 npm 装完就能用，不用手配路径）；
+// 找不到再退回开发机上的工作区路径。
+const DEFAULT_WATCHER = (() => {
+  const bundled = path.join(__dirname, 'tools', 'desktop-watch', 'watch-desktop.mjs');
+  try { if (fs.existsSync(bundled)) return bundled; } catch { /* ignore */ }
+  return path.join(WORKSPACE, '工具', 'desktop-watch', 'watch-desktop.mjs');
+})();
 const DESKTOP = path.join(process.env.USERPROFILE || 'C:\\Users\\作早饭', 'Desktop');
 const IDLE_WAIT_MS = 6000;
 const HEADER = '【桌面操作轨迹·自动记录（无需回答，主人说「检查刚才那些」时参考）】';
