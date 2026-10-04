@@ -1,0 +1,35 @@
+{
+  "name": "dsh-aiwatch",
+  "version": "0.3.7",
+  "private": true,
+  "description": "DSH 插件：监听指定目录的真人文件操作（键鼠活跃判定），把轨迹静默写进会话上下文（不唤醒 AI），省掉告诉 AI 去哪个目录看的最后一步。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.1",
+    "@deepseek-ai/dsh-llm": ">=0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "license": "MIT"
+}
