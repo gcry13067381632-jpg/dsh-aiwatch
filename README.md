@@ -1,3 +1,5 @@
+**语言：中文 | [English](README.en.md)**
+
 <div align="center">
 
 <img src="docs/assets/ai-ni.svg" alt="爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你 爱你" width="860">
