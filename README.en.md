@@ -99,55 +99,46 @@ A few other small courtesies:
 
 ## Installation
 
-Requirements: dsh 0.1.7+, Windows (foreground-window detection and the hotkey rely on Win32 APIs).
+### Option 1 — one-click script (Windows, recommended)
+
+```powershell
+git clone https://github.com/gcry13067381632-jpg/dsh-aiwatch.git
+cd dsh-aiwatch
+.\install.ps1                        # pack → add to profile → verify → print next steps
+
+# if script execution is blocked:
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+
+# if your profile is not named "web":
+.\install.ps1 -Profile myweb
+```
+
+The script does exactly four things: **pack into a no-space temp dir** → `dsh plugin --profile web add <tgz>` → **verify** (plugin present, watcher bundled) → print the next steps.
+
+### Option 2 — manual (macOS / Linux, or if you want control)
 
 ```bash
-# 1. Build the package (this repo root *is* the plugin)
-npm pack                 # produces dsh-aiwatch-x.y.z.tgz
-
-# 2. Install it into your dsh profile (example: ~/.dsh/profiles/web)
-cd ~/.dsh/profiles/web
-npm pkg set dependencies.dsh-aiwatch="file:/absolute/path/dsh-aiwatch-x.y.z.tgz"
-npm install
+git clone https://github.com/gcry13067381632-jpg/dsh-aiwatch.git
+cd dsh-aiwatch
+npm pack --pack-destination /tmp
+npx @deepseek-ai/dsh plugin --profile web add /tmp/dsh-aiwatch-0.3.8.tgz
 ```
 
-Then register the plugin in the profile's `package.json`:
+> 💡 **Why a tarball, and not `add`-ing the source directory** (a measured lesson):
+> ① On Windows, a path containing spaces gets split at the spaces (pnpm then complains `- isn't supported`);
+> ② `add`-ing a directory creates a pnpm link (junction), so the plugin cannot infer its profile from its code location and credentials never reach disk — env vars only.
 
-```json
-{
-  "dsh": {
-    "profile": {
-      "bundles": ["dsh-aiwatch"]
-    }
-  }
-}
-```
+### After installing (same for both options)
 
-And configure it in the profile's `cordis.patch.yml` (or simply use the settings card on the plugin page after installing — no hand-written YAML needed):
-
-```yaml
-- id: aiwatch
-  name: dsh-aiwatch
-  config:
-    dirs:
-      - D:\your\folder\to\watch
-    humanWindowSec: 20        # no input for this long = "nobody is here"
-    injectMaxLines: 12        # max entries per batch
-    flushIdleSec: 10          # flush anyway after this long
-    enabled: true
-    hotkey: Ctrl+Alt+A        # empty = no hotkey
-    hotkeyWake: true          # hotkey also wakes the AI up
-```
-
-**Restart dsh once** (host-side JS changes are only picked up on restart; if you only changed the watcher script, toggling the plugin off/on is enough).
-
-Finally, bind a session with the slash command:
+1. **Restart dsh once** — host-side code is only reloaded on restart (if you only changed the watcher script, toggling the plugin off/on is enough);
+2. Open the **"watch settings" card on the plugin page**: pick folders, record a hotkey (no hand-written YAML needed; you can still write it, see the table below);
+3. In **the session you want to receive the trail**, send:
 
 ```text
 /aiwatch bind
 ```
 
-Other commands: `/aiwatch status`, `/aiwatch recent 10`, `/aiwatch flush`, `/aiwatch off`.
+That session now receives the trail. Other commands: `/aiwatch status`, `/aiwatch recent 10`, `/aiwatch flush`, `/aiwatch off`.
 
 ---
 

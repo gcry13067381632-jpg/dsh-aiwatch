@@ -99,49 +99,40 @@
 
 ## 安装
 
-前提：dsh 0.1.7+，Windows（前台窗口判定和热键依赖 Win32）。
+### 方式一：一键脚本（Windows，推荐）
+
+```powershell
+git clone https://github.com/gcry13067381632-jpg/dsh-aiwatch.git
+cd dsh-aiwatch
+.\install.ps1                        # 打包 → 装进 profile → 自检 → 打印重启指引
+
+# 若系统禁止运行脚本：
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+
+# 你的 profile 不叫 web 就指定：
+.\install.ps1 -Profile myweb
+```
+
+脚本只做四件事：**打包到无空格的临时目录** → `dsh plugin --profile web add <tgz>` → **自检**（本体在不在、监听脚本有没有随包带进来）→ 打印下一步。
+
+### 方式二：手动（macOS / Linux，或想自己控制）
 
 ```bash
-# 1. 拿到插件包（本仓库根目录就是插件本体）
-npm pack                 # 产出 dsh-aiwatch-x.y.z.tgz
-
-# 2. 装进你的 dsh profile（示例路径：~/.dsh/profiles/web）
-cd ~/.dsh/profiles/web
-npm pkg set dependencies.dsh-aiwatch="file:/绝对路径/dsh-aiwatch-x.y.z.tgz"
-npm install
+git clone https://github.com/gcry13067381632-jpg/dsh-aiwatch.git
+cd dsh-aiwatch
+npm pack --pack-destination /tmp
+npx @deepseek-ai/dsh plugin --profile web add /tmp/dsh-aiwatch-0.3.8.tgz
 ```
 
-然后在 profile 的 `package.json` 里把插件挂进 bundles：
+> 💡 **为什么必须打 tarball、而不是直接 `add` 源码目录**（实测教训）：
+> ① 目录路径含空格时 Windows 会把参数在空格处拆碎（pnpm 报 `- isn't supported`）；
+> ② `add` 目录 = pnpm link（junction），插件无法按"代码位置"反推 profile，凭据落不了盘，只能走环境变量。
 
-```json
-{
-  "dsh": {
-    "profile": {
-      "bundles": ["dsh-aiwatch"]
-    }
-  }
-}
-```
+### 装完之后（两种方式都一样）
 
-再往 profile 的 `cordis.patch.yml` 里写一段配置（也可以装好后在**插件详情页的卡片里改**，不用手写）：
-
-```yaml
-- id: aiwatch
-  name: dsh-aiwatch
-  config:
-    dirs:
-      - D:\你的\想要被看着的\文件夹
-    humanWindowSec: 20        # 多久没键鼠动作就算「没人操作」
-    injectMaxLines: 12        # 一批最多几条
-    flushIdleSec: 10          # 最老的轨迹攒这么久还没发就自动发
-    enabled: true
-    hotkey: Ctrl+Alt+A        # 留空=不用热键
-    hotkeyWake: true          # 热键触发时叫醒 AI 干活
-```
-
-**重启一次 dsh**（host 端 JS 改动必须重启才会重新加载；只改监听脚本时，把插件关掉再打开即可）。
-
-最后在那个会话里发一条斜杠命令，把当前会话绑上：
+1. **重启一次 dsh** —— host 端代码只在重启时重新加载（只改了监听脚本的话，把插件关掉再打开即可）；
+2. 打开**插件详情页的「监听设置」卡片**：填要看的文件夹、录一个热键（不用手写 YAML；想写也行，见下面的配置表）；
+3. 在**你想接收轨迹的那个会话**里发一句：
 
 ```text
 /aiwatch bind
